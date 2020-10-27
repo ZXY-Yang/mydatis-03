@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.mybatis.mapper.ProductMapper">
+    <resultMap id="BaseMap" type="com.smart.mybatis.entity.Product">
+    <id property="productId" column="product_id"/>
+    <result property="title" column="title"/>
+    <result property="content" column="content"/>
+    <result property="img" column="img"/>
+    <result property="price" column="price"/>
+</resultMap>
+    <select id="selectListByCateId" resultMap="BaseMap">
+        SELECT product_id,title,content,img,price,cate_id,create_date
+        FROM product
+        WHERE status=0
+        AND cate_id=#{CateId}
+</select>
+    <insert id="insert">
+        INSERT INTO product(title, content, img, price, cate_id)
+        VALUE(#{product.title},#{product.content},#{product.img},#{product.price},#{product.cateId})
+    </insert>
+</mapper>
